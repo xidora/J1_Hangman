@@ -12,20 +12,23 @@ public class Validator {
 
     public static boolean isValid(String inputString) {
         HashSet<Character> inputtedLetters = Game.getInputtedLetters();
+        try {
+            if (inputString.length() != 1) {
+                throw new InputException(NOT_A_SINGLE_LETTER);
+            }
 
-        if (inputString.length() != 1) {
-            throw new InputExeption(NOT_A_SINGLE_LETTER);
+            char letter = toUpperCase(inputString.charAt(0));
+            if (!((letter >= 'А') && (letter <= 'Я'))) {
+                throw new InputException(NOT_IN_THE_RANGE);
+            }
+
+            if (inputtedLetters.contains(letter)) {
+                throw new InputException(USED_LETTER);
+            }
+            return true;
+        } catch (InputException e) {
+            System.out.println(e.getMessage());
+            return false;
         }
-
-        char letter = toUpperCase(inputString.charAt(0));
-        if (!((letter >= 'А') && (letter <= 'Я'))) {
-            throw new InputExeption(NOT_IN_THE_RANGE);
-        }
-
-        if (inputtedLetters.contains(letter)) {
-            throw new InputExeption(USED_LETTER);
-        }
-
-        return true;
     }
 }

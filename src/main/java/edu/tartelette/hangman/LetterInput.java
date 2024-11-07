@@ -13,12 +13,8 @@ public class LetterInput {
         while (true) {
             System.out.println(INPUT_LETTER_TEXT);
             String input = aScanner.nextLine();
-            try {
-                if (Validator.isValid(input)) {
-                    return toUpperCase(input.charAt(0));
-                }
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
+            if (Validator.isValid(input)) {
+                return toUpperCase(input.charAt(0));
             }
         }
     }
