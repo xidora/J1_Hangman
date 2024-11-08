@@ -2,11 +2,13 @@ package edu.tartelette.hangman;
 
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
 
 public class SecretWord {
 
     private String secretWord = RandomWord.getRandomWord().toUpperCase();
-    private LinkedList<Character> visibleWord = getHiddenWord();
+    private List<Character> visibleWord = getHiddenWord();
 
     public SecretWord() {}
 
@@ -30,8 +32,8 @@ public class SecretWord {
         return secretWord;
     }
 
-    public HashSet<Character> getStartLetters() {
-        HashSet<Character> secretLetters = new HashSet<>();
+    public Set<Character> getStartLetters() {
+        Set<Character> secretLetters = new HashSet<>();
         for (int i = 0; i < secretWord.length(); i++) {
             secretLetters.add(secretWord.charAt(i));
         }
@@ -39,8 +41,8 @@ public class SecretWord {
     }
 
     //return hidden Secret word under "*"
-    private LinkedList<Character> getHiddenWord() {
-        LinkedList<Character> hiddenWord = new LinkedList<>();
+    private List<Character> getHiddenWord() {
+        List<Character> hiddenWord = new LinkedList<>();
         for(int i = 0; i < secretWord.length(); i++) {
             hiddenWord.add('*');
         }

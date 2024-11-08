@@ -20,7 +20,7 @@ public class Menu {
                     new Game().start();
                     break;
                 case EXIT:
-                    System.exit(0);
+                        System.exit(0);
                     break;
                 default:
                     System.out.println(INVALID_CHOICE_TEXT);

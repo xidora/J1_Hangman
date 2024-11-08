@@ -1,6 +1,7 @@
 package edu.tartelette.hangman;
 
 import java.util.HashSet;
+import java.util.Set;
 
 import static edu.tartelette.hangman.HangmanArt.printHangmanArt;
 
@@ -8,7 +9,7 @@ public class Game {
     private int attemptsLeft = 6;
     private static HashSet<Character> inputtedLetters = new HashSet<>();
     private SecretWord aSecretWord = new SecretWord();
-    private HashSet<Character> secretLetters = aSecretWord.getStartLetters();
+    private Set<Character> secretLetters = aSecretWord.getStartLetters();
 
     private static final String WIN_TEXT = "You won";
     private static final String LOSE_TEXT = "You lose";
