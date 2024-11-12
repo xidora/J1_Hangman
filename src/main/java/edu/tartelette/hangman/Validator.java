@@ -6,9 +6,9 @@ import static java.lang.Character.toUpperCase;
 
 public class Validator {
 
-    private static final String NOT_A_SINGLE_LETTER = "Not a single letter";
-    private static final String NOT_IN_THE_RANGE = "Isn't in the range [а-яА-Я]";
-    private static final String USED_LETTER = "This is used letter";
+    private static final String NOT_A_SINGLE_LETTER = "Вы ввели не одину букву";
+    private static final String NOT_IN_THE_RANGE = "Введенная буква в некорректном диапазоне [а-яА-Я]";
+    private static final String USED_LETTER = "Эта буква уже вводилась ранее";
 
     public static boolean isValid(String inputString) {
         HashSet<Character> inputtedLetters = Game.getInputtedLetters();

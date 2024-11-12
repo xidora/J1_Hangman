@@ -4,11 +4,11 @@ import java.util.Scanner;
 
 public class Menu {
 
-    private static final String CHOICE_TEXT = "===\nType [s] to start or [e] to exit";
-    private static final String INVALID_CHOICE_TEXT = "Invalid input";
+    private static final String CHOICE_TEXT = "===\nВведите [н,Н] для начала игры или [в,В] для Выхода";
+    private static final String INVALID_CHOICE_TEXT = "Ввод некорректен";
 
-    private static final String PLAY = "S";
-    private static final String EXIT = "E";
+    private static final String PLAY = "Н";
+    private static final String EXIT = "В";
 
     public static void start() {
         while (true) {

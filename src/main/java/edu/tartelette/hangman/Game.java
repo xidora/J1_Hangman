@@ -11,15 +11,15 @@ public class Game {
     private SecretWord aSecretWord = new SecretWord();
     private Set<Character> secretLetters = aSecretWord.getStartLetters();
 
-    private static final String WIN_TEXT = "You won";
-    private static final String LOSE_TEXT = "You lose";
-    private static final String GUESS_IS_RIGHT_TEXT = "Your guess is right";
-    private static final String GUESS_IS_WRONG_TEXT = "Your guess is wrong";
-    private static final String ATTEMPT_LEFT_TEXT = "Attempts Left: ";
-    private static final String INPUTTED_LETTER_TEXT = "Inputted Letters: ";
-    private static final String VISIBLE_LETTER_TEXT = "Visible word: ";
+    private static final String WIN_TEXT = "Вы выиграли";
+    private static final String LOSE_TEXT = "Вы проиграли";
+    private static final String GUESS_IS_RIGHT_TEXT = "Ваша догадка верна";
+    private static final String GUESS_IS_WRONG_TEXT = "Ваша догадка ошибочна";
+    private static final String ATTEMPT_LEFT_TEXT = "Оставшихся попыток: ";
+    private static final String INPUTTED_LETTER_TEXT = "Введенные буквы: ";
+    private static final String VISIBLE_LETTER_TEXT = "Отгаданная часть слова: ";
     private static final String LINE_DELIMETER = "====================";
-    private static final String SECRET_WORD_IS_TEXT = "Secret Word is: ";
+    private static final String SECRET_WORD_IS_TEXT = "Загаданное слово: ";
     private static final String DELIMETER = " | ";
 
     public Game() {

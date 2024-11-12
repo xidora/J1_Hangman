@@ -6,7 +6,7 @@ import static java.lang.Character.toUpperCase;
 
 public class LetterInput {
 
-    private static final String INPUT_LETTER_TEXT = "Type single new russian letter [а-яА-Я] :";
+    private static final String INPUT_LETTER_TEXT = "Введите новую невведенную буквы [а-яА-Я] :";
 
     public static char get() {
         Scanner aScanner = new Scanner(System.in);
