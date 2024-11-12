@@ -5,10 +5,10 @@ import java.util.Random;
 import java.util.Scanner;
 
 
-public class RandomWord {
+public class Dictionary {
 
     private static final String FILE_NAME = "dictionary.txt";
-    private static final String GAME_EXT = "Can't read dictionary file\\nGame is over";
+    private static final String GAME_EXIT = "Can't read dictionary file\\nGame is over";
     private static final String ERROR_READ_DICTIONARY = "Error: Couldn't read dictionary file ";
     private static final String CAUGHT = "Caught Exception: ";
 
@@ -30,7 +30,7 @@ public class RandomWord {
             }
         }
         else {
-            System.out.println(GAME_EXT);
+            System.out.println(GAME_EXIT);
             System.exit(0);
         }
 
@@ -49,5 +49,5 @@ public class RandomWord {
         }
     }
 
-    private RandomWord() {}
+    private Dictionary() {}
 }

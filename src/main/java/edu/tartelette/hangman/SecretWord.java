@@ -7,7 +7,7 @@ import java.util.Set;
 
 public class SecretWord {
 
-    private String secretWord = RandomWord.getRandomWord().toUpperCase();
+    private String secretWord = Dictionary.getRandomWord().toUpperCase();
     private List<Character> visibleWord = getHiddenWord();
 
     public SecretWord() {}
