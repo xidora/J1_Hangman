@@ -68,9 +68,9 @@ public class HangmanArt {
         """,
   };
 
+  private HangmanArt() {}
+
   public static void printHangmanArt(int attemptsLeft) {
     System.out.print(ART[attemptsLeft]);
   }
-
-  private HangmanArt() {}
 }

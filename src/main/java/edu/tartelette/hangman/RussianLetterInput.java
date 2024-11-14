@@ -4,9 +4,11 @@ import static java.lang.Character.toUpperCase;
 
 import java.util.Scanner;
 
-public class RussianLetterInput {
+public final class RussianLetterInput {
 
   private static final String INPUT_LETTER = "Введите новую невведенную буквы [а-яА-Я] :";
+
+  private RussianLetterInput() {}
 
   public static char get() {
     Scanner scanner = new Scanner(System.in);
@@ -18,6 +20,4 @@ public class RussianLetterInput {
       }
     }
   }
-
-  private RussianLetterInput() {}
 }

@@ -4,11 +4,13 @@ import static java.lang.Character.toUpperCase;
 
 import java.util.HashSet;
 
-public class Validator {
+public final class Validator {
 
   private static final String NOT_SINGLE_LETTER = "Вы ввели не одину букву";
   private static final String NOT_RANGE = "Введенная буква в некорректном диапазоне [а-яА-Я]";
   private static final String USED_LETTER = "Эта буква уже вводилась ранее";
+
+  private Validator() {}
 
   public static boolean isValid(String inputString) {
     HashSet<Character> inputtedLetters = Game.getInputtedLetters();
