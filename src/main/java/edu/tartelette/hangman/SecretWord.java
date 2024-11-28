@@ -7,24 +7,23 @@ import java.util.Set;
 
 
 public class SecretWord {
-
   private String secretWord = Dictionary.getRandomWord().toUpperCase();
-  private List<Character> visibleWord = getHiddenWord();
+  private List<Character> displayWord = getInitialDisplayWord();
 
   public SecretWord() {}
 
   public void revealLetter(char letter) {
-    for (int i = 0; i < visibleWord.size(); i++) {
+    for (int i = 0; i < displayWord.size(); i++) {
       if (secretWord.charAt(i) == letter) {
-        visibleWord.set(i, letter);
+        displayWord.set(i, letter);
       }
     }
   }
 
   public String getVisibleWord() {
     StringBuilder stringBuilder = new StringBuilder();
-    for (int i = 0; i < visibleWord.size(); i++) {
-      stringBuilder.append(visibleWord.get(i));
+    for (int i = 0; i < displayWord.size(); i++) {
+      stringBuilder.append(displayWord.get(i));
     }
     return stringBuilder.toString();
   }
@@ -42,7 +41,7 @@ public class SecretWord {
   }
 
   //return hidden Secret word under "*"
-  private List<Character> getHiddenWord() {
+  private List<Character> getInitialDisplayWord() {
     List<Character> hiddenWord = new LinkedList<>();
     for (int i = 0; i < secretWord.length(); i++) {
       hiddenWord.add('*');

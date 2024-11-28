@@ -7,7 +7,7 @@ import java.util.Set;
 
 public class Game {
   private int attemptsLeft = 6;
-  private static HashSet<Character> inputtedLetters = new HashSet<>();
+  private static Set<Character> inputtedLetters = new HashSet<>();
   private SecretWord secretWord = new SecretWord();
   private Set<Character> secretLetters = secretWord.getStartLetters();
 
@@ -58,12 +58,11 @@ public class Game {
     if (secretLetters.contains(letter)) {
       secretLetters.remove(letter);
       return true;
-    } else {
-      return false;
     }
+    return false;
   }
 
-  public static HashSet<Character> getInputtedLetters() {
+  public static Set<Character> getInputtedLetters() {
     return inputtedLetters;
   }
 }

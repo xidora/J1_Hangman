@@ -5,9 +5,8 @@ import static java.lang.Character.toUpperCase;
 import java.util.Scanner;
 
 public final class RussianLetterInput {
-
-  private static final String INPUT_LETTER = "Введите новую невведенную буквы [а-яА-Я] :";
-
+  private static final String INPUT_LETTER = "Введите новую невведенную буквы "
+                                              + RussianLanguage.RANGE_TEXT + " :";
   private RussianLetterInput() {}
 
   public static char get() {

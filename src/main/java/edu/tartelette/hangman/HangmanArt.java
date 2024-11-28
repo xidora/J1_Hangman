@@ -1,7 +1,6 @@
 package edu.tartelette.hangman;
 
 public class HangmanArt {
-
   private static final String[] ART = new String[]{
       """
         ═╦═════╦═
