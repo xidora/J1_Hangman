@@ -21,6 +21,7 @@ public class Game {
   private static final String LINE_DELIMETER = "====================";
   private static final String SECRET_WORD = "Загаданное слово: ";
   private static final String DELIMETER = " | ";
+  private static final String USED_LETTER = "Эта буква уже вводилась ранее";
 
   public Game() {
     inputtedLetters = new HashSet<>();
@@ -33,7 +34,14 @@ public class Game {
       System.out.print(ATTEMPT_LEFT + attemptsLeft + DELIMETER);
       System.out.println(INPUTTED_LETTER + inputtedLetters);
       System.out.println(VISIBLE_LETTER + secretWord.getVisibleWord());
-      char letter = RussianLetterInput.get();
+      char letter;
+      while(true) {
+        letter = Inputter.get();
+        if (!inputtedLetters.contains(letter)) {
+          break;
+        }
+        System.out.println(USED_LETTER);
+      }
       inputtedLetters.add(letter);
       if (checkLetter(letter)) {
         secretWord.revealLetter(letter);
