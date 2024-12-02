@@ -1,50 +1,38 @@
 package edu.tartelette.hangman;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.*;
+
 
 public final class Dictionary {
-  private static final String FILE_NAME = "dictionary.txt";
-  private static final String GAME_EXIT = "Не могу прочесть файл словаря\\nИгра окончена";
-  private static final String ERROR_READ_DICTIONARY = "Ошибка: Не могу прочесть файл словаря ";
-  private static final String CAUGHT = "Caught Exception: ";
+
+  private static final String ERROR_READ_DICTIONARY = "Ошибка при чтении файла словаря ";
 
   private Dictionary() {}
 
-  public static String getRandomWord() {
-    List<String> libraryOfWords = getLibraryOfWords(FILE_NAME);
-
+  public static String getRandomWord(String fileName) throws EmptyDictionaryException {
+    final List<String> libraryOfWords = getLibraryOfWords(fileName);
+    System.out.println("libraryOfWords.size() = " + libraryOfWords.size());
     Random random = new Random();
     int wordsNumber = random.nextInt(libraryOfWords.size());
     return libraryOfWords.get(wordsNumber);
   }
 
-  public static List<String> getLibraryOfWords(String fileName) {
-    List<String> libraryOfWords = new ArrayList<>();
-    if (isFileExist(FILE_NAME)) {
-      Scanner scanner = new Scanner(ClassLoader.getSystemResourceAsStream(fileName));
-      while (scanner.hasNext()) {
-        libraryOfWords.add(scanner.nextLine());
-      }
-    } else {
-      System.out.println(GAME_EXIT);
-      System.exit(0);
+  private static List<String> getLibraryOfWords(String fileName) throws EmptyDictionaryException {
+    ClassLoader classLoader = Dictionary.class.getClassLoader();
+    if (classLoader.getResource(fileName) == null) {
+      throw new EmptyDictionaryException(ERROR_READ_DICTIONARY);
     }
-
-    return libraryOfWords;
-  }
-
-  private static boolean isFileExist(String fileName) {
+    File file = new File(classLoader.getResource(fileName).getFile());
+    System.out.println("2");
+    List<String> fileLines;
     try {
-      if (ClassLoader.getSystemResourceAsStream(fileName) == null) {
-        throw new FileNotFoundException(ERROR_READ_DICTIONARY + fileName);
-      }
-      return true;
-    } catch (FileNotFoundException e) {
-      System.out.println(CAUGHT + e.getMessage());
-      return false;
+      fileLines = Files.readAllLines(file.toPath());
+    } catch (IOException e) {
+      throw new RuntimeException(e);
     }
+    return fileLines;
   }
 }

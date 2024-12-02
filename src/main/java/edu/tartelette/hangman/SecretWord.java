@@ -7,10 +7,12 @@ import java.util.Set;
 
 
 public class SecretWord {
-  private String secretWord = Dictionary.getRandomWord().toUpperCase();
-  private List<Character> displayWord = getInitialDisplayWord();
+  private static final String FILE_NAME = "dictionary.txt";
 
-  public SecretWord() {}
+  private final String secretWord = Dictionary.getRandomWord(FILE_NAME).toUpperCase();
+  private final List<Character> displayWord = getInitialDisplayWord();
+
+  public SecretWord() throws EmptyDictionaryException {}
 
   public void revealLetter(char letter) {
     for (int i = 0; i < displayWord.size(); i++) {
@@ -40,7 +42,6 @@ public class SecretWord {
     return secretLetters;
   }
 
-  //return hidden Secret word under "*"
   private List<Character> getInitialDisplayWord() {
     List<Character> hiddenWord = new LinkedList<>();
     for (int i = 0; i < secretWord.length(); i++) {

@@ -8,8 +8,8 @@ import java.util.Set;
 public class Game {
   private int attemptsLeft = 6;
   private static Set<Character> inputtedLetters = new HashSet<>();
-  private SecretWord secretWord = new SecretWord();
-  private Set<Character> secretLetters = secretWord.getStartLetters();
+  private SecretWord secretWord;
+  private final Set<Character> secretLetters;
 
   private static final String WIN = "Вы выиграли";
   private static final String LOSE = "Вы проиграли";
@@ -22,6 +22,16 @@ public class Game {
   private static final String SECRET_WORD = "Загаданное слово: ";
   private static final String DELIMETER = " | ";
   private static final String USED_LETTER = "Эта буква уже вводилась ранее";
+
+  {
+    try {
+      secretWord = new SecretWord();
+    } catch (EmptyDictionaryException emptyDictionaryException) {
+      emptyDictionaryException.printStackTrace();
+      System.exit(0);
+    }
+    secretLetters = secretWord.getStartLetters();
+  }
 
   public Game() {
     inputtedLetters = new HashSet<>();
@@ -68,9 +78,5 @@ public class Game {
       return true;
     }
     return false;
-  }
-
-  public static Set<Character> getInputtedLetters() {
-    return inputtedLetters;
   }
 }

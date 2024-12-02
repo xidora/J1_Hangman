@@ -18,7 +18,7 @@ public final class Inputter {
         Validator.validate(input);
         return toUpperCase(input.charAt(0));
       } catch (InputException inputException) {
-        System.out.println(inputException.getMessage());
+        inputException.printStackTrace();
       }
     }
   }
