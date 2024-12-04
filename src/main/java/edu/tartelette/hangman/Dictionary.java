@@ -8,13 +8,12 @@ import java.util.*;
 
 public final class Dictionary {
 
-  private static final String ERROR_READ_DICTIONARY = "Ошибка при чтении файла словаря ";
+  private static final String ERROR_READ_DICTIONARY = "Error: Ошибка при чтении файла словаря ";
 
   private Dictionary() {}
 
   public static String getRandomWord(String fileName) throws EmptyDictionaryException {
     final List<String> libraryOfWords = getLibraryOfWords(fileName);
-    System.out.println("libraryOfWords.size() = " + libraryOfWords.size());
     Random random = new Random();
     int wordsNumber = random.nextInt(libraryOfWords.size());
     return libraryOfWords.get(wordsNumber);
@@ -26,7 +25,6 @@ public final class Dictionary {
       throw new EmptyDictionaryException(ERROR_READ_DICTIONARY);
     }
     File file = new File(classLoader.getResource(fileName).getFile());
-    System.out.println("2");
     List<String> fileLines;
     try {
       fileLines = Files.readAllLines(file.toPath());
