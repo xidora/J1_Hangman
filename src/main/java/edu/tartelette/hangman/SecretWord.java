@@ -7,7 +7,7 @@ import java.util.Set;
 
 public class SecretWord {
   private static final String ERROR_REVEAL_LETTER =
-      "Ошибка раскрытия буквы в маске. Нет такой буквы";
+      "Error revealLetter method. В маске нет такой буквы";
 
   private final String secretWord;
   private final List<Character> mask;
@@ -34,13 +34,13 @@ public class SecretWord {
     return false;
   }
 
-  public boolean isMaskOpened() {
+  public boolean isMaskCovered() {
     for (Character character : mask) {
       if (character == '*') {
-        return false;
+        return true;
       }
     }
-    return true;
+    return false;
   }
 
   public void revealLetter(char letter) throws LetterNotInWordException {

@@ -8,7 +8,8 @@ import java.util.*;
 
 public final class Dictionary {
 
-  private static final String ERROR_READ_DICTIONARY = "Error: Ошибка при чтении файла словаря ";
+  private static final String ERROR_READ_DICTIONARY =
+      "Error getLibraryOfWords method. Ошибка при чтении файла словаря ";
 
   private Dictionary() {}
 
@@ -25,11 +26,11 @@ public final class Dictionary {
       throw new EmptyDictionaryException(ERROR_READ_DICTIONARY);
     }
     File file = new File(classLoader.getResource(fileName).getFile());
-    List<String> fileLines;
+    List<String> fileLines = null;
     try {
       fileLines = Files.readAllLines(file.toPath());
-    } catch (IOException e) {
-      throw new RuntimeException(e);
+    } catch (IOException exception) {
+      exception.printStackTrace();
     }
     return fileLines;
   }

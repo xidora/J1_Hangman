@@ -30,10 +30,11 @@ public class Game {
   {
     try {
       String newWord = Dictionary.getRandomWord(FILE_NAME).toUpperCase();
-      secretWord = new SecretWord(newWord);
-      System.out.println(newWord);
-    } catch (EmptyDictionaryException emptyDictionaryException) {
-      emptyDictionaryException.printStackTrace();
+      //secretWord = new SecretWord(newWord);
+      //System.out.println(newWord);
+      secretWord = new SecretWord("АП");
+    } catch (EmptyDictionaryException exception) {
+      exception.printStackTrace();
       System.exit(0);
     }
     secretLetters = secretWord.getStartLetters();
@@ -44,7 +45,7 @@ public class Game {
   }
 
   public void start() {
-    while ((attemptsLeft > 0) || (secretWord.isMaskOpened())) {
+    while ((attemptsLeft > 0) && (secretWord.isMaskCovered())) {
       System.out.println(LINE_DELIMETER);
       printHangmanArt(attemptsLeft);
       System.out.print(ATTEMPT_LEFT + attemptsLeft + DELIMETER);
@@ -73,8 +74,8 @@ public class Game {
           System.out.println(GUESS_WRONG);
           attemptsLeft--;
         }
-      } catch (LetterNotInWordException error) {
-        error.printStackTrace();
+      } catch (LetterNotInWordException exception) {
+        exception.printStackTrace();
       }
       //System.out.println(LINE_DELIMETER);
     }
