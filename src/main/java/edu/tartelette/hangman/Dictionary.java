@@ -1,8 +1,11 @@
 package edu.tartelette.hangman;
 
-import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Random;
 
@@ -12,12 +15,10 @@ public final class Dictionary {
     private static final String ERROR_READ_DICTIONARY =
             "Error getLibraryOfWords method. Ошибка при чтении файла словаря ";
 
-    private Dictionary() {
-    }
+    private Dictionary() {}
 
-    public static String getRandomWord(String fileName) throws EmptyDictionaryException {
+    public static String getRandomWord(String fileName, Random random) throws EmptyDictionaryException {
         final List<String> libraryOfWords = getLibraryOfWords(fileName);
-        Random random = new Random();
         int wordsNumber = random.nextInt(libraryOfWords.size());
         return libraryOfWords.get(wordsNumber);
     }
@@ -27,11 +28,13 @@ public final class Dictionary {
         if (classLoader.getResource(fileName) == null) {
             throw new EmptyDictionaryException(ERROR_READ_DICTIONARY);
         }
-        File file = new File(classLoader.getResource(fileName).getFile());
         List<String> fileLines = null;
+        URL resource = classLoader.getResource(fileName);
+        Path path = null;
         try {
-            fileLines = Files.readAllLines(file.toPath());
-        } catch (IOException exception) {
+            path = Paths.get(resource.toURI());
+            fileLines = Files.readAllLines(path);
+        } catch (IOException | URISyntaxException exception) {
             exception.printStackTrace();
         }
         return fileLines;

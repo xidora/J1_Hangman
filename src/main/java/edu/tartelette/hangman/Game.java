@@ -3,6 +3,7 @@ package edu.tartelette.hangman;
 import static edu.tartelette.hangman.HangmanArt.printHangmanArt;
 
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 public class Game {
@@ -26,7 +27,7 @@ public class Game {
 
     {
         try {
-            String newWord = Dictionary.getRandomWord(FILE_NAME).toUpperCase();
+            String newWord = Dictionary.getRandomWord(FILE_NAME, new Random()).toUpperCase();
             secretWord = new SecretWord(newWord);
         } catch (EmptyDictionaryException exception) {
             exception.printStackTrace();
@@ -38,32 +39,11 @@ public class Game {
 
     public void start() {
         while (hangman.isAlive() && (secretWord.isMaskCovered())) {
-            System.out.println(LINE_DELIMITER);
-            printHangmanArt(hangman.getHangStage());
-            int attemptsLeft = hangman.getMaxHangStage() - hangman.getHangStage();
-            System.out.print(ATTEMPT_LEFT + attemptsLeft + DELIMITER);
-            System.out.println(INPUTTED_LETTER + alphabetRepository.getLetters());
+            printGameStatus();
+            printMask();
 
-            List<Character> mask = secretWord.getMask();
-            String maskString = mask.stream()
-                    .map(String::valueOf)
-                    .collect(Collectors.joining());
-            System.out.println(VISIBLE_LETTER + maskString);
-
-            char letter;
-            while (true) {
-                letter = LetterInput.get();
-                if (!alphabetRepository.containsLetter(letter)) {
-                    break;
-                }
-                System.out.println(USED_LETTER);
-            }
-
-            try {
-                alphabetRepository.addLetter(letter);
-            } catch (AlphabetRepositoryException exception) {
-                throw new RuntimeException(exception);
-            }
+            char letter = getNewLetter();
+            addToRepository(letter);
 
             try {
                 if (secretWord.isContainLetter(letter)) {
@@ -78,6 +58,27 @@ public class Game {
             }
         }
 
+        printResult();
+        Menu.start();
+    }
+
+    private void printGameStatus() {
+        System.out.println(LINE_DELIMITER);
+        printHangmanArt(hangman.getHangStage());
+        int attemptsLeft = hangman.getMaxHangStage() - hangman.getHangStage();
+        System.out.print(ATTEMPT_LEFT + attemptsLeft + DELIMITER);
+        System.out.println(INPUTTED_LETTER + alphabetRepository.getLetters());
+    }
+
+    private void printMask() {
+        List<Character> mask = secretWord.getMask();
+        String maskString = mask.stream()
+                .map(String::valueOf)
+                .collect(Collectors.joining());
+        System.out.println(VISIBLE_LETTER + maskString);
+    }
+
+    private void printResult() {
         if (hangman.isAlive()) {
             System.out.println(WIN);
         } else {
@@ -85,6 +86,25 @@ public class Game {
             printHangmanArt(hangman.getHangStage());
         }
         System.out.println(SECRET_WORD + secretWord.getSecretWord());
-        Menu.start();
+    }
+
+    private char getNewLetter() {
+        char letter;
+        while (true) {
+            letter = LetterInput.get();
+            if (!alphabetRepository.containsLetter(letter)) {
+                break;
+            }
+            System.out.println(USED_LETTER);
+        }
+        return letter;
+    }
+
+    private void addToRepository(char letter) {
+        try {
+            alphabetRepository.addLetter(letter);
+        } catch (AlphabetRepositoryException exception) {
+            throw new RuntimeException(exception);
+        }
     }
 }
