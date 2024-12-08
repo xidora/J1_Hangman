@@ -1,26 +1,32 @@
 package edu.tartelette.hangman;
 
-import static java.lang.Character.toUpperCase;
-
 import java.util.Scanner;
 
-public final class LetterInput {
+public abstract class LetterInput {
     private static final String INPUT_LETTER = "Введите новую невведенную буквы "
             + RussianLanguage.RANGE_TEXT + " :";
 
-    private LetterInput() {
+    private final String title;
+    private final Validator validator;
+
+    private final Scanner scanner = new Scanner(System.in);
+
+    private LetterInput(String title, Validator validator) {
+        this.title = title;
+        this.validator = validator;
     }
 
-    public static char get() {
-        Scanner scanner = new Scanner(System.in);
+    public char get() {
         while (true) {
-            System.out.println(INPUT_LETTER);
-            String input = scanner.nextLine();
+            System.out.println(title);
+            String text = scanner.nextLine();
             try {
-                Validator.validate(input);
-                return toUpperCase(input.charAt(0));
-            } catch (InputException inputException) {
-                System.out.println(inputException);
+                validator.validate(text);
+                return text.charAt(0);
+            } catch (Validator.NotSingleLetterException e) {
+                System.out.println(notSingleLetterMessage());
+            } catch (Validator.NotInRangeException e) {
+                System.out.println(notInRangeMessage());
             }
         }
     }

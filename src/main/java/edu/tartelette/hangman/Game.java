@@ -53,7 +53,7 @@ public class Game {
                     System.out.println(GUESS_WRONG);
                     hangman.increaseHangStage();
                 }
-            } catch (LetterNotInWordException | IllegalHangManStagaException exception) {
+            } catch (LetterNotInWordException | IllegalHangManStageException exception) {
                 exception.printStackTrace();
             }
         }

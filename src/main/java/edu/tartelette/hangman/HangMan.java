@@ -21,9 +21,9 @@ public class HangMan {
         return (hangStage != MAX_HANG_STAGE);
     }
 
-    public void increaseHangStage() throws IllegalHangManStagaException {
+    public void increaseHangStage() throws IllegalHangManStageException {
         if (hangStage >= MAX_HANG_STAGE) {
-            throw new IllegalHangManStagaException(ERROR_INCREASE_HANG_STAGE);
+            throw new IllegalHangManStageException(ERROR_INCREASE_HANG_STAGE);
         }
         hangStage++;
     }
