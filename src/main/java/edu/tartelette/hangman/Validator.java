@@ -2,7 +2,7 @@ package edu.tartelette.hangman;
 
 import static java.lang.Character.toUpperCase;
 
-public final class Validator {
+public class Validator {
     private static final String NOT_SINGLE_LETTER = "Вы ввели не одну букву";
     private static final String NOT_RANGE = "Введенная буква в некорректном диапазоне [%c-%c%c-%c]";
 
@@ -28,17 +28,4 @@ public final class Validator {
             throw new InputException(message);
         }
     }
-
-    public static class NotSingleLetterException extends IllegalArgumentException {
-        public NotSingleLetterException(String message) {
-            super(message);
-        }
-    }
-
-    public static class NotInRangeException extends IllegalArgumentException {
-        public NotInRangeException(String message) {
-            super(message);
-        }
-    }
-
 }

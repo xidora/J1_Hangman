@@ -3,15 +3,12 @@ package edu.tartelette.hangman;
 import java.util.Scanner;
 
 public abstract class LetterInput {
-    private static final String INPUT_LETTER = "Введите новую невведенную буквы "
-            + RussianLanguage.RANGE_TEXT + " :";
-
     private final String title;
     private final Validator validator;
 
     private final Scanner scanner = new Scanner(System.in);
 
-    private LetterInput(String title, Validator validator) {
+    protected LetterInput(String title, Validator validator) {
         this.title = title;
         this.validator = validator;
     }
@@ -23,11 +20,17 @@ public abstract class LetterInput {
             try {
                 validator.validate(text);
                 return text.charAt(0);
-            } catch (Validator.NotSingleLetterException e) {
+            } catch (NotSingleLetterException e) {
                 System.out.println(notSingleLetterMessage());
-            } catch (Validator.NotInRangeException e) {
+            } catch (NotInRangeException e) {
                 System.out.println(notInRangeMessage());
+            } catch (InputException e) {
+                System.out.println(e.getMessage());
             }
         }
     }
+
+    protected abstract String notSingleLetterMessage();
+
+    protected abstract String notInRangeMessage();
 }

@@ -10,7 +10,7 @@ public class SecretWord {
     private final String secretWord;
     private final List<Character> mask;
 
-    public SecretWord(String newWord) throws EmptyDictionaryException {
+    public SecretWord(final String newWord) throws EmptyDictionaryException {
         this.secretWord = newWord;
         mask = getInitialMask();
     }

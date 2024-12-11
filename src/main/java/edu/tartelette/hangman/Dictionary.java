@@ -10,15 +10,16 @@ import java.util.List;
 import java.util.Random;
 
 
-public final class Dictionary {
+public class Dictionary {
 
     private static final String ERROR_READ_DICTIONARY =
             "Error getLibraryOfWords method. Ошибка при чтении файла словаря ";
 
-    private Dictionary() {}
+    private Dictionary() { }
 
-    public static String getRandomWord(String fileName, Random random) throws EmptyDictionaryException {
+    public static String getRandomWord(String fileName) throws EmptyDictionaryException {
         final List<String> libraryOfWords = getLibraryOfWords(fileName);
+        Random random = new Random();
         int wordsNumber = random.nextInt(libraryOfWords.size());
         return libraryOfWords.get(wordsNumber);
     }

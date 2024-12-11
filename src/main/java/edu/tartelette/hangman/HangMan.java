@@ -6,8 +6,7 @@ public class HangMan {
             "Error increaseHangStage method. Состояние висельника некорректно";
     private int hangStage = 0;
 
-    public HangMan() {
-    }
+    public HangMan() { }
 
     public int getHangStage() {
         return hangStage;

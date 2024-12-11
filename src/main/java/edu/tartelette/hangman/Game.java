@@ -3,7 +3,6 @@ package edu.tartelette.hangman;
 import static edu.tartelette.hangman.HangmanArt.printHangmanArt;
 
 import java.util.List;
-import java.util.Random;
 import java.util.stream.Collectors;
 
 public class Game {
@@ -18,24 +17,25 @@ public class Game {
     private static final String SECRET_WORD = "Загаданное слово: ";
     private static final String DELIMITER = " | ";
     private static final String USED_LETTER = "Эта буква уже вводилась ранее";
+    private static final LetterInput letterInput = new RussianLetterInput();
 
     private static final String FILE_NAME = "dictionary.txt";
 
     private final HangMan hangman = new HangMan();
-    private final AlphabetRepository alphabetRepository = new AlphabetRepository();
+    private final LettersRepository lettersRepository = new LettersRepository();
     private SecretWord secretWord;
 
     {
         try {
-            String newWord = Dictionary.getRandomWord(FILE_NAME, new Random()).toUpperCase();
+            String newWord = Dictionary.getRandomWord(FILE_NAME).toUpperCase();
             secretWord = new SecretWord(newWord);
-        } catch (EmptyDictionaryException exception) {
-            exception.printStackTrace();
+        } catch (EmptyDictionaryException e) {
+            e.printStackTrace();
             System.exit(0);
         }
     }
 
-    public Game() {}
+    public Game() { }
 
     public void start() {
         while (hangman.isAlive() && (secretWord.isMaskCovered())) {
@@ -53,8 +53,8 @@ public class Game {
                     System.out.println(GUESS_WRONG);
                     hangman.increaseHangStage();
                 }
-            } catch (LetterNotInWordException | IllegalHangManStageException exception) {
-                exception.printStackTrace();
+            } catch (LetterNotInWordException | IllegalHangManStageException e) {
+                e.printStackTrace();
             }
         }
 
@@ -67,7 +67,7 @@ public class Game {
         printHangmanArt(hangman.getHangStage());
         int attemptsLeft = hangman.getMaxHangStage() - hangman.getHangStage();
         System.out.print(ATTEMPT_LEFT + attemptsLeft + DELIMITER);
-        System.out.println(INPUTTED_LETTER + alphabetRepository.getLetters());
+        System.out.println(INPUTTED_LETTER + lettersRepository.getLetters());
     }
 
     private void printMask() {
@@ -91,8 +91,8 @@ public class Game {
     private char getNewLetter() {
         char letter;
         while (true) {
-            letter = LetterInput.get();
-            if (!alphabetRepository.containsLetter(letter)) {
+            letter = Character.toUpperCase(letterInput.get());
+            if (!lettersRepository.containsLetter(letter)) {
                 break;
             }
             System.out.println(USED_LETTER);
@@ -100,11 +100,11 @@ public class Game {
         return letter;
     }
 
-    private void addToRepository(char letter) {
+    private void addToRepository(final char letter) {
         try {
-            alphabetRepository.addLetter(letter);
-        } catch (AlphabetRepositoryException exception) {
-            throw new RuntimeException(exception);
+            lettersRepository.addLetter(letter);
+        } catch (LettersRepositoryException e) {
+            throw new RuntimeException(e);
         }
     }
 }

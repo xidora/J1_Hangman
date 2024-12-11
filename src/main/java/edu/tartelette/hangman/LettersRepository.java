@@ -3,18 +3,18 @@ package edu.tartelette.hangman;
 import java.util.HashSet;
 import java.util.Set;
 
-public class AlphabetRepository {
+public class LettersRepository {
     private final Set<Character> Letters = new HashSet<>();
 
-    public AlphabetRepository() {}
+    public LettersRepository() {}
 
     public Set<Character> getLetters() {
         return Letters;
     }
 
-    public void addLetter(char character) throws AlphabetRepositoryException {
+    public void addLetter(char character) throws LettersRepositoryException {
         if (Letters.contains(character)) {
-            throw new AlphabetRepositoryException("Alphabet already exists");
+            throw new LettersRepositoryException("Alphabet already exists");
         }
         Letters.add(character);
     }

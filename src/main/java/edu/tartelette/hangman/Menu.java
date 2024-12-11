@@ -2,16 +2,14 @@ package edu.tartelette.hangman;
 
 import java.util.Scanner;
 
-public final class Menu {
+public class Menu {
     private static final String CHOICE_TEXT =
             "===\nВведите [н,Н] для начала игры или [в,В] для Выхода";
     private static final String INVALID_CHOICE = "Ввод некорректен";
-
     private static final String PLAY = "Н";
     private static final String EXIT = "В";
 
-    private Menu() {
-    }
+    private Menu() { }
 
     public static void start() {
         while (true) {
