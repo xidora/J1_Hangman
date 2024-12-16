@@ -1,5 +1,8 @@
 package edu.tartelette.hangman;
 
+import edu.tartelette.hangman.input.LetterInput;
+import edu.tartelette.hangman.input.RussianLetterInput;
+
 import static edu.tartelette.hangman.HangmanArt.printHangmanArt;
 
 import java.util.List;
@@ -17,9 +20,10 @@ public class Game {
     private static final String SECRET_WORD = "Загаданное слово: ";
     private static final String DELIMITER = " | ";
     private static final String USED_LETTER = "Эта буква уже вводилась ранее";
-    private static final LetterInput letterInput = new RussianLetterInput();
 
     private static final String FILE_NAME = "dictionary.txt";
+
+    private static final LetterInput letterInput = new RussianLetterInput();
 
     private final HangMan hangman = new HangMan();
     private final LettersRepository lettersRepository = new LettersRepository();

@@ -1,4 +1,4 @@
-package edu.tartelette.hangman;
+package edu.tartelette.hangman.input;
 
 import java.util.Scanner;
 

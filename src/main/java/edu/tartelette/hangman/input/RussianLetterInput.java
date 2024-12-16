@@ -1,9 +1,9 @@
-package edu.tartelette.hangman;
+package edu.tartelette.hangman.input;
 
 public class RussianLetterInput extends LetterInput {
   private final static char FIRST_LETTER = 'А';
   private final static char LAST_LETTER = 'Я';
-  private final static String TITLE_TEMPLATE = "Введите букву [%c-%c%c-%c]";
+  private final static String TITLE_TEMPLATE = "Введите букву [%c-%c,%c-%c]";
 
   private static final String NOT_A_SINGLE_LETTER = "Введите одну букву";
   private static final String NOT_IN_THE_RANGE_TEMPLATE = "Введите русскую букву";
